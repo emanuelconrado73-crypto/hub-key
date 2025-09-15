@@ -2,22 +2,37 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Hub Key</title>
+    <title>Gerador de Key do Hub</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #1e1e1e; color: #fff; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; }
+        h1 { color: #ff4500; }
+        input { width: 250px; padding: 10px; margin:10px 0; font-size:16px; border-radius:5px; border:none; text-align:center; }
+        button { padding:10px 20px; font-size:16px; border:none; border-radius:5px; background:#ff4500; color:#fff; cursor:pointer; transition:0.2s; }
+        button:hover { background:#ff6347; }
+    </style>
 </head>
 <body>
     <h1>Gerador de Key do Hub</h1>
-    <p>Sua key:</p>
-    <input type="text" id="keyField" readonly>
+    <input type="text" id="keyField" readonly placeholder="Clique no botão para gerar">
     <button onclick="gerarKey()">Gerar Key</button>
+    <button onclick="copiarKey()">Copiar Key</button>
 
     <script>
         function gerarKey() {
             let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             let key = "";
-            for(let i=0; i<12; i++){
+            for(let i=0;i<12;i++){
                 key += chars.charAt(Math.floor(Math.random()*chars.length));
             }
             document.getElementById("keyField").value = key;
+        }
+
+        function copiarKey() {
+            let keyInput = document.getElementById("keyField");
+            keyInput.select();
+            keyInput.setSelectionRange(0, 99999);
+            document.execCommand("copy");
+            alert("Key copiada: " + keyInput.value);
         }
     </script>
 </body>
